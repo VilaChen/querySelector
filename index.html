@@ -49,22 +49,41 @@
 					return child;
 				}
 				const childRes = myQuerySelector(selector, child);
-				if (childRes !== null) return childRes;
+				if (childRes) return childRes;
 			}
 			return null;
 		};
-		// 深度优先
-		function myQuerySelector1(selector, element) {
 
-			return null;
+		// 深度优先
+		function myQuerySelector1(selector, nodeList) {
+			const children = nodeList ?? Array.from(document.body.children);
+			let nextList = [];
+			const targetEle = children.find(child => child.classList.contains(selector.slice(1)));
+			if (targetEle) return targetEle;
+
+			const hasChildNode = children.some(child => child.children.length);
+			if (hasChildNode) {
+				for (let child of children) {
+					const childList = Array.from(child.children);
+					if (childList.length) {
+						nextList = nextList.concat(childList);
+					}
+				};
+				const childRes = myQuerySelector1(selector, nextList);
+				if (childRes) return childRes;
+			}
+
+			return null
 		};
+
+
 		const p5 = document.querySelector(".p5");
 		console.log(p5);
 		// const div5 = myQuerySelector(".div5");
 		const mySelector = myQuerySelector(".span5");
 		console.log(mySelector);
 
-		const mySelector1 = myQuerySelector1(".span7");
+		const mySelector1 = myQuerySelector1(".span5");
 		console.log(mySelector1);
 
 	</script>
