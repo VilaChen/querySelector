@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div class="div1">
+		<p class="p1"><span class="span1">123</span></p>
+	</div>
+	<div class="div2">
+		<p class="p2"><span class="span2">123</span></p>
+	</div>
+	<div class="div3">
+		<p class="p3"><span class="span3">123</span></p>
+	</div>
+	<div class="div4">
+		<p class="p4"><span class="span4">123</span></p>
+	</div>
+	<div class="div5">
+		<p class="p5"><span class="span5">123</span></p>
+	</div>
+	<div class="div6">
+		<p class="p6"><span class="span6">123</span></p>
+	</div>
+	<div class="div7">
+		<p class="p7"><span class="span7">123</span></p>
+	</div>
+	<div class="div8">
+		<p class="p8"><span class="span8">123</span></p>
+	</div>
+	<div class="div9">
+		<p class="p9"><span class="span9">123</span></p>
+	</div>
+	<div class="div10">
+		<p class="p10"><span class="span10">123</span></p>
+	</div>
+	<script>
+		// 广度优先
+		function myQuerySelector(selector, element) {
+			const rootEle = element ?? document.body;
+			const children = Array.from(rootEle.children);
+			for (let child of children) {
+				if (child.classList.contains(selector.slice(1))) {
+					return child;
+				}
+				const childRes = myQuerySelector(selector, child);
+				if (childRes !== null) return childRes;
+			}
+			return null;
+		};
+		// 深度优先
+		function myQuerySelector1(selector, element) {
+
+			return null;
+		};
+		const p5 = document.querySelector(".p5");
+		console.log(p5);
+		// const div5 = myQuerySelector(".div5");
+		const mySelector = myQuerySelector(".span5");
+		console.log(mySelector);
+
+		const mySelector1 = myQuerySelector1(".span7");
+		console.log(mySelector1);
+
+	</script>
+</body>
+
+</html>
